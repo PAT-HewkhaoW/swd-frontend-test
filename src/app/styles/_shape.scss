@@ -1,0 +1,99 @@
+@import "base";
+
+// color
+$swd-shape--color: rgb(111, 112, 116);
+$swd-shape--background-color: #fff;
+$swd-shape--hover-background-color: $color-primary-orange;
+$swd-shape--hover-background-active: $color-primary-green;
+
+// shape
+$height: 100px;
+$square-frame--width: $height;
+$rectangle-frame--width: 300px;
+$full-frame--width: 100%;
+$trapezoid--p: 50px;
+$skew-angle: 30deg;
+
+.swd-shape {
+  background-color: $swd-shape--color;
+
+  // □
+  &.square {
+    width: $square-frame--width;
+    height: $height;
+  }
+
+  // ▭
+  &.rectangle {
+    width: $full-frame--width;
+    height: $height;
+  }
+
+  // ⏢
+  &.trapezoid {
+    width: $full-frame--width;
+    height: $height;
+    background-color: transparent;
+    border-right: 50px solid transparent;
+    border-left: 50px solid transparent;
+    border-bottom: 100px solid $swd-shape--color;
+
+    // ? clip-path
+    // clip-path: polygon($trapezoid--p 0, calc(100% - $trapezoid--p) 0, 100% 100%, 0 100%);
+  }
+
+  // ▱
+  &.skewed-rectangle {
+    transform: skew($skew-angle);
+    height: $height;
+    width: calc($full-frame--width - ($height * tan(30deg)));
+  }
+
+  // ◯
+  &.circle {
+    width: $square-frame--width;
+    height: $height;
+    border-radius: 100%;
+  }
+
+  //
+  &.oval {
+    width: $full-frame--width;
+    height: $height;
+    border: 0;
+    border-radius: 100%;
+  }
+
+  // ◁ , △ , ▽ , ▷
+  &.triangle {
+    width: $height;
+    height: $square-frame--width;
+    background-color: transparent;
+    border-color: transparent;
+
+    &:not(&.right):not(&.left):not(&.down) {
+      // top : 0 | left, right : height , | bottom : width
+      border-left: calc($height / 2) solid transparent;
+      border-right: calc($height / 2) solid transparent;
+      border-bottom: $square-frame--width solid $swd-shape--color;
+    }
+
+    &.right {
+      border-top: calc($height / 2) solid transparent;
+      border-bottom: calc($height / 2) solid transparent;
+      border-left: $square-frame--width solid $swd-shape--color;
+    }
+
+    &.down {
+      border-left: calc($height / 2) solid transparent;
+      border-right: calc($height / 2) solid transparent;
+      border-top: $square-frame--width solid $swd-shape--color;
+    }
+
+    &.left {
+      border-top: calc($height / 2) solid transparent;
+      border-bottom: calc($height / 2) solid transparent;
+      border-right: $square-frame--width solid $swd-shape--color;
+    }
+  }
+}

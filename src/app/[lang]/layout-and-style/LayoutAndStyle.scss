@@ -1,0 +1,92 @@
+@import "../../styles/breakpoints";
+@import "../../styles/shape";
+
+$shape-container--background-color: $swd-shape--background-color;
+$shape-container--hover--background-color: $color-primary-orange;
+$shape-container--active--background-color: $color-primary-green;
+
+$shape-container-label--background-color: $color-primary-green;
+$shape-container-label--text-color: #fff;
+
+$shadow-color: rgba(68, 68, 70, 0.15);
+
+.page-wrapper {
+  width: 100%;
+  display: grid;
+  justify-items: center;
+
+  .layout-and-style-container {
+    width: 100%;
+    min-width: $screen-max-desktop;
+    max-width: $screen-max-desktop;
+
+    .page-title {
+      font-size: 24px;
+    }
+
+    .page-content {
+      display: flex;
+      flex-direction: column;
+
+      .button-group {
+        padding: 16px;
+        border-radius: 16px;
+        background-color: $shape-container--background-color;
+        position: relative;
+        cursor: pointer;
+
+        &:hover {
+          background: $shape-container--hover--background-color;
+          box-shadow: 0 -4px 16px $shadow-color;
+        }
+
+        &:active,
+        &:focus {
+          background: $shape-container--active--background-color;
+          box-shadow: 0 -4px 16px $shadow-color;
+
+          .label {
+            box-shadow: 0 -4px 8px $shadow-color;
+          }
+        }
+
+        .label {
+          padding: 6px 16px;
+          background-color: $shape-container-label--background-color;
+          color: $shape-container-label--text-color;
+          position: absolute;
+          bottom: 0;
+          left: 50%;
+          transform: translate(-50%, 50%);
+
+          font-size: 16px;
+          border-radius: 9999px;
+        }
+      }
+    }
+  }
+}
+
+.action-button {
+  width: 100%;
+  display: grid;
+  padding: 16px;
+  place-items: center;
+  border: 0;
+  border-radius: 16px;
+  position: relative;
+
+  .label {
+    padding: 6px 12px;
+    background-color: $shape-container-label--background-color;
+    color: $shape-container-label--text-color;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 50%);
+
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 9999px;
+  }
+}

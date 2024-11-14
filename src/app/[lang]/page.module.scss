@@ -1,0 +1,44 @@
+.page {
+  position: relative;
+  display: grid;
+  place-items: center;
+
+  .main {
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    width: 100%;
+    max-width: 1024px;
+
+    .item-container {
+      width: 100%;
+      display: flex;
+      gap: 16px;
+
+      .test-item {
+        width: 100%;
+        padding: 24px;
+        background-color: white;
+        border: 0;
+        border-radius: 4px;
+
+        .title {
+          font-size: 20px;
+          font-weight: 100;
+        }
+
+        .description {
+          padding-top: 48px;
+        }
+      }
+    }
+  }
+}
+
+.language-switcher {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 20px;
+  z-index: 999;
+}

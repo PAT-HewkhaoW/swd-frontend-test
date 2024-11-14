@@ -9,14 +9,23 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^2.3.0",
     "accept-language": "^3.0.20",
     "antd": "^5.20.6",
+    "cookie": "^1.0.1",
+    "dayjs": "^1.11.13",
     "i18next": "^23.16.5",
+    "i18next-browser-languagedetector": "^8.0.0",
     "i18next-resources-to-backend": "^1.2.1",
+    "moment": "^2.30.1",
     "next": "14.2.12",
+    "next-i18next": "^15.3.1",
     "react": "^18",
+    "react-cookie": "^7.2.2",
     "react-dom": "^18",
+    "react-flagkit": "^2.0.4",
     "react-i18next": "^15.1.1",
+    "react-redux": "^9.1.2",
     "redux-toolkit": "^1.1.2",
     "sass": "^1.80.6"
   },

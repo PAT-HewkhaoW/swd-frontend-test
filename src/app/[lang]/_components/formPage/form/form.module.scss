@@ -1,0 +1,69 @@
+@use "../../../../styles/breakpoints";
+
+.form-wrapper {
+  width: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.form-container {
+  padding: 24px;
+  border: 1px solid black;
+  border-radius: 8px;
+
+  width: 100%;
+  max-width: 1024px;
+
+  @include breakpoints.screenBreak(mobile) {
+    max-width: 320px;
+  }
+
+  @include breakpoints.screenBreak(tablet) {
+    max-width: 560px;
+  }
+
+  @include breakpoints.screenBreak(desktop) {
+    max-width: 1024px;
+  }
+}
+
+.form-group {
+  width: 100%;
+  display: flex;
+  gap: 8px;
+
+  .form-fluid {
+    width: 100%;
+  }
+
+  .form-hug {
+    min-width: webkit-fill-available;
+    min-width: fit-content;
+  }
+
+  .form-space {
+    display: flex;
+    gap: 16px;
+  }
+
+  .form-space-divider {
+    padding-bottom: 24px;
+  }
+}
+
+/* Chrome, Safari, Edge, Opera */
+.input-number::-webkit-outer-spin-button,
+.input-number::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.flag-option-container {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.mySelect {
+  min-width: 139px;
+}

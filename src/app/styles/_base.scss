@@ -1,0 +1,12 @@
+@import "breakpoints";
+$color-primary-orange: #ffa200;
+$color-primary-green: #6eda78;
+
+:root {
+  --page-padding: 24px;
+}
+
+.page {
+  padding: var(--page-padding);
+  width: 100%;
+}

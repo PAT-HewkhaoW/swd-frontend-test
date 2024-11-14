@@ -1,0 +1,22 @@
+$screen-min-mobile: 320px;
+$screen-max-mobile: 560px;
+$screen-min-tablet: 561px;
+$screen-max-tablet: 1024px;
+$screen-min-desktop: 1025px;
+$screen-max-desktop: 1440px;
+
+@mixin screenBreak($screen) {
+  @if $screen == mobile {
+    @media (min-width: $screen-min-mobile) and (max-width: $screen-max-mobile) {
+      @content;
+    }
+  } @else if $screen == tablet {
+    @media (min-width: $screen-min-tablet) and (max-width: $screen-max-tablet) {
+      @content;
+    }
+  } @else if $screen == desktop {
+    @media (min-width: $screen-min-desktop) and (max-width: $screen-max-desktop) {
+      @content;
+    }
+  }
+}

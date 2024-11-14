@@ -1,0 +1,23 @@
+{
+  "pageTitle": "การจัดการหน้าฟอร์ม",
+
+  "title": "คำนำหน้า",
+  "titlePlaceholder": "คำนำหน้า",
+  "titleHelp": "กรุณากรอกคำนำหน้า",
+
+  "Mr": "นาย",
+  "Ms": "นาง",
+  "Mrs": "นางสาว",
+
+  "firstName": "Firstname",
+  "firstNamePlaceholder": "Firstname",
+  "firstNameHelp": "Please Input Your Firstname",
+
+  "lastName": "Lastname",
+  "lastNamePlaceholder": "Lastname",
+  "lastNameHelp": "Please Input Your Lastname",
+
+  "thai": "ไทย",
+  "french": "ฝรั่งเศส",
+  "american": "อเมริกา"
+}

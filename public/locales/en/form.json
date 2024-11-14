@@ -1,0 +1,71 @@
+{
+  "pageTitle": "Form & Table",
+
+  "title": "Title",
+  "titlePlaceholder": "Title",
+  "titleHelp": "Please Input Your Title",
+
+  "Mr": "Mr.",
+  "Ms": "Ms.",
+  "Mrs": "Mrs.",
+
+  "firstName": "Firstname",
+  "firstNamePlaceholder": "Firstname",
+  "firstNameHelp": "Please Input Your Firstname",
+
+  "lastName": "Lastname",
+  "lastNamePlaceholder": "Lastname",
+  "lastNameHelp": "Please Input Your Lastname",
+
+  "citizenId": "CitizenID",
+  "citizenIdPlaceholder": "CitizenID",
+  "citizenIdHelp": "Please Input Your CitizenID",
+
+  "birthDate": "BirthDay",
+  "birthDatePlaceholder": "BirthDay",
+  "birthDateHelp": "Please Input Your BirthDay",
+
+  "nationality": "Nationality",
+  "nationalityPlaceholder": "Nationality",
+  "nationalityHelp": "Please Input Your Nationality",
+
+  "thai": "Thai",
+  "french": "French",
+  "american": "American",
+
+  "gender": "Gender",
+  "genderPlaceholder": "Gender",
+  "genderHelp": "Please Input Your Gender",
+
+  "male": "Male",
+  "female": "Female",
+  "unsex": "Unsex",
+
+  "mobileCode": "MobileCode",
+  "mobileCodePlaceholder": "MobileCode",
+  "mobileCodeHelp": "Please Input Your MobileCode",
+
+  "options": {
+    "th": "+66",
+    "us": "+1",
+    "fr": "+33"
+  },
+
+  "mobilePhone": "MobilePhone",
+  "mobilePhonePlaceholder": "MobilePhone",
+  "mobilePhoneHelp": "Please Input Your MobilePhone",
+
+  "actionButton": {
+    "edit": "EDIT",
+    "delete": "DELETE",
+    "selectAll": "Select All"
+  },
+
+  "table": {
+    "name": "Name",
+    "gender": "Gender",
+    "mobilePhone": "MobilePhone",
+    "nationality": "Nationality",
+    "manage": "MANAGE"
+  }
+}

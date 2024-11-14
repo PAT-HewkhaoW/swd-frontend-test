@@ -1,0 +1,10 @@
+{
+  "th": "TH",
+  "en": "EN",
+  "form": "form",
+  "test": "Test {{num}}",
+  "test-title": "Test {{num}}",
+
+  "test1desc": "Layout & Style",
+  "test2desc": "Form & Table"
+}
