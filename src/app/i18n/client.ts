@@ -8,7 +8,7 @@ import { initReactI18next, useTranslation as useTranslationOrg } from "react-i18
 import LanguageDetector from "i18next-browser-languagedetector";
 import { useCookies } from "react-cookie";
 import { cookieName, getOptions, supportedLngs } from "./setting";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const runsOnServerSide = typeof window === "undefined";
 
@@ -25,53 +25,45 @@ i18next
     ...getOptions(),
     lng: undefined,
     preload: runsOnServerSide ? supportedLngs : [],
+    detection: {
+      order: ["cookie", "navigator", "htmlTag"],
+      caches: ["cookie"],
+    },
   });
 
 export function useTranslation(lng?: string, ns?: string | string[]) {
   const [cookies, setCookie] = useCookies([cookieName]);
+  const [tReady, setTReady] = useState(false);
+
   const ret = useTranslationOrg(ns);
   const { i18n } = ret;
-  //   if (runsOnServerSide && lng && i18n.resolvedLanguage !== lng) {
-  //     i18n.changeLanguage(lng);
-  //   } else {
-  //     // eslint-disable-next-line react-hooks/rules-of-hooks
-  //     const [activeLng, setActiveLng] = useState(i18n.resolvedLanguage);
-
-  //     // eslint-disable-next-line react-hooks/rules-of-hooks
-  //     useEffect(() => {
-  //       if (activeLng === i18n.resolvedLanguage) return;
-  //       setActiveLng(i18n.resolvedLanguage);
-  //     }, [activeLng, i18n.resolvedLanguage]);
-
-  //     // eslint-disable-next-line react-hooks/rules-of-hooks
-  //     useEffect(() => {
-  //       if (!lng || i18n.resolvedLanguage === lng) return;
-  //       i18n.changeLanguage(lng);
-  //     }, [lng, i18n]);
-
-  //     // eslint-disable-next-line react-hooks/rules-of-hooks
-  //     useEffect(() => {
-  //       if (cookies.locale === lng) return;
-  //       setCookie(cookieName, lng, { path: "/" });
-  //     }, [lng, cookies.locale]);
-  //   }
 
   const currentLng = lng || cookies.locale || i18n.language;
+  console.log(
+    `--------------------\ncurrentLngs : ${currentLng}\ncookie : ${cookies.locale}\ni18n : ${i18n.language}\n--------------------`
+  );
+
+  useEffect(() => {
+    if (i18n.isInitialized) {
+      setTReady(true);
+    }
+  }, [i18n.isInitialized]);
 
   //  watch for cookie or props? change
   useEffect(() => {
-    if (currentLng && i18n.language !== currentLng) {
+    if (tReady && currentLng && i18n.language !== currentLng) {
+      console.log("set current ");
+
       i18n.changeLanguage(currentLng);
     }
-  }, [currentLng, i18n]);
+  }, [currentLng, i18n, tReady]);
 
   // sync cookie🍪
   useEffect(() => {
     if (cookies.locale !== currentLng) {
       setCookie(cookieName, currentLng, { path: "/" });
-      console.log(currentLng);
     }
-  }, [currentLng, cookies.locale, setCookie]);
+  }, [i18n, currentLng, cookies.locale, setCookie]);
 
   return ret;
 }

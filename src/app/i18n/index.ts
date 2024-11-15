@@ -9,6 +9,7 @@ export default async function initI18nextTranslation(
   instance?: i18n
 ) {
   const i18nInstance = instance || createInstance();
+
   i18nInstance.use(initReactI18next);
 
   i18nInstance.use(
