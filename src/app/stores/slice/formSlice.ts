@@ -1,6 +1,10 @@
+"use client";
+
 import { createSlice, nanoid, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 import { Moment } from "moment";
+
+const runOnServerSide = typeof window !== "undefined";
 
 type FieldType = {
   title?: string;
@@ -23,7 +27,10 @@ interface DataStateProps {
 }
 
 const initialState: DataStateProps = {
-  data: JSON.parse(localStorage.getItem("formData") || "[]"),
+  data:
+    runOnServerSide && localStorage.getItem("formData")
+      ? JSON.parse(localStorage.getItem("formData")!)
+      : [],
   formData: {},
 };
 
@@ -57,7 +64,10 @@ const formSlice = createSlice({
 
       const searchIndex = state.data.findIndex((item) => item.key == id);
 
-      console.log(searchIndex);
+      if (searchIndex === -1) {
+        console.warn("Item Not Founded");
+        state.formData = {};
+      }
 
       if (searchIndex !== -1) {
         state.data = [
@@ -69,7 +79,8 @@ const formSlice = createSlice({
         state.formData = {};
         localStorage.setItem("formData", JSON.stringify(state.data));
       } else {
-        console.log("cannot find index");
+        console.log("cannot find item");
+        state.formData = {};
       }
     },
     // deleteOne
