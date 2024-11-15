@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "@/app/i18n/client";
 import { RootState } from "@/app/stores/store";
-import { post, resetFormData, updateOne } from "@/app/stores/slice/formSlice";
+import { post, updateOne } from "@/app/stores/slice/formSlice";
 import style from "./form.module.scss";
 
 import { Button, DatePicker, Form, FormProps, Input, Radio, Select, Space } from "antd";
@@ -122,7 +122,7 @@ export default function CForm({ value }: FormDataProps) {
 
     if (id) {
       console.log("update");
-      const confirmed = confirm("test");
+      const confirmed = confirm(t("dialog.editSave"));
 
       if (confirmed) {
         handleUpdateSubmit(id, { ...value, key: id });
@@ -159,15 +159,15 @@ export default function CForm({ value }: FormDataProps) {
         >
           <div className={style["form-group"]}>
             <Form.Item<FieldType>
-              label={t("title")}
+              label={t("label.title")}
               name="title"
-              rules={[{ required: true, message: t("titleHelp") }]}
+              rules={[{ required: true, message: t("help.title") }]}
               className={style["form-hug"]}
             >
               <Select
-                placeholder={t("titlePlaceholder")}
+                placeholder={t("placeholder.title")}
                 options={titleOptions.map((title) => ({
-                  label: t(title.labelKey),
+                  label: t(`options.title.${title.labelKey}`),
                   value: title.value,
                 }))}
                 className={style.mySelect}
@@ -175,46 +175,46 @@ export default function CForm({ value }: FormDataProps) {
             </Form.Item>
 
             <Form.Item<FieldType>
-              label={t("firstName")}
+              label={t("label.firstName")}
               name="firstName"
-              rules={[{ required: true, message: t("firstNameHelp") }]}
+              rules={[{ required: true, message: t("help.firstName") }]}
               className={style["form-fluid"]}
             >
-              <Input placeholder={t("firstNamePlaceholder")}></Input>
+              <Input placeholder={t("placeholder.firstName")}></Input>
             </Form.Item>
 
             <Form.Item<FieldType>
-              label={t("lastName")}
+              label={t("label.lastName")}
               name="lastName"
-              rules={[{ required: true, message: t("lastNameHelp") }]}
+              rules={[{ required: true, message: t("help.lastName") }]}
               className={style["form-fluid"]}
             >
-              <Input placeholder={t("lastNamePlaceholder")}></Input>
+              <Input placeholder={t("placeholder.lastName")}></Input>
             </Form.Item>
           </div>
 
           <div className={style["form-group"]}>
             <Form.Item<FieldType>
-              label={t("birthDate")}
+              label={t("label.birthDate")}
               name="birthDate"
-              rules={[{ required: true, message: t("birthDateHelp") }]}
+              rules={[{ required: true, message: t("help.birthDate") }]}
             >
               <DatePicker
                 value={form.getFieldValue("birthDate")}
-                placeholder={t("birthDatePlaceholder")}
+                placeholder={t("placeholder.birthDate")}
               />
             </Form.Item>
 
             <Form.Item<FieldType>
-              label={t("nationality")}
+              label={t("label.nationality")}
               name="nationality"
-              rules={[{ required: true, message: t("nationalityHelp") }]}
+              rules={[{ required: true, message: t("help.nationality") }]}
             >
               <Select
-                placeholder={t("nationalityPlaceholder")}
+                placeholder={t("placeholder.nationality")}
                 options={nationalityOptions.map((nationality) => ({
                   value: nationality.value,
-                  label: t(nationality.labelKey),
+                  label: t(`options.nationality.${nationality.labelKey}`),
                 }))}
                 className={style.mySelect}
               />
@@ -223,14 +223,14 @@ export default function CForm({ value }: FormDataProps) {
 
           <div className={style["form-group"]}>
             <Form.Item<FieldType>
-              label={t("citizenId")}
+              label={t("label.citizenId")}
               name="citizenId"
               rules={[
-                { required: true, message: t("citizenIdHelp") },
+                { required: true, message: t("help.citizenId") },
                 {
                   validator: (_, value) => {
                     if (!value || value.length !== 13) {
-                      return Promise.reject("Citizen ID must be exactly 13 characters.");
+                      return Promise.reject(t("help.citizenIdIndexes"));
                     }
                     return Promise.resolve();
                   },
@@ -246,14 +246,14 @@ export default function CForm({ value }: FormDataProps) {
 
           <div className={style["form-group"]}>
             <Form.Item<FieldType>
-              label={t("gender")}
+              label={t("label.gender")}
               name="gender"
-              rules={[{ required: true, message: t("genderHelp") }]}
+              rules={[{ required: true, message: t("help.gender") }]}
             >
               <Radio.Group>
                 {genderOptions.map((gender, index) => (
                   <Radio key={index} value={gender.value}>
-                    {t(gender.labelKey)}
+                    {t(`options.gender.${gender.labelKey}`)}
                   </Radio>
                 ))}
               </Radio.Group>
@@ -263,13 +263,13 @@ export default function CForm({ value }: FormDataProps) {
           <div className={style["form-group"]}>
             <Form.Item<FieldType>
               name="mobilePhone"
-              label={t("mobilePhone")}
+              label={t("label.mobilePhone")}
               rules={[{ required: true, message: "" }]}
             >
               <Space className={style["form-space"]}>
                 <Form.Item<FieldType>
                   name="mobileCode"
-                  rules={[{ required: true, message: t("mobileCodeHelp") }]}
+                  rules={[{ required: true, message: t("help.mobileCode") }]}
                   style={{ marginBottom: "0" }}
                 >
                   <Select
@@ -278,17 +278,18 @@ export default function CForm({ value }: FormDataProps) {
                       label: (
                         <div className={style["flag-option-container"]}>
                           <Flag size={16} country={code.labelKey.toUpperCase()} />
-                          {t(`options.${code.labelKey}`)}
+                          {t(`options.mobileCode.${code.labelKey}`)}
                         </div>
                       ),
                     }))}
                     className={style.mySelect}
+                    placeholder={t("placeholder.mobileCode")}
                   />
                 </Form.Item>
                 <div>-</div>
                 <Form.Item<FieldType>
                   name="mobilePhone"
-                  rules={[{ required: true, message: t("mobilePhoneHelp") }]}
+                  rules={[{ required: true, message: t("help.mobilePhone") }]}
                   style={{ marginBottom: "0" }}
                 >
                   <PhoneInput
@@ -304,27 +305,32 @@ export default function CForm({ value }: FormDataProps) {
           <div className={style["form-group"]}>
             <Form.Item<FieldType>
               name="passportNo"
-              label={t("passportNo")}
-              rules={[{ required: true, message: t("passportNoHelp") }]}
+              label={t("label.passportNo")}
+              rules={[{ required: true, message: t("help.passportNo") }]}
             >
-              <Input maxLength={9} />
+              <Input maxLength={9} placeholder={t("placeholder.passportNo")} />
             </Form.Item>
           </div>
 
           <div className={style["form-group"]}>
             <Form.Item<FieldType>
               name="expectedSalary"
-              label={t("expectedSalary")}
-              rules={[{ required: true, message: t("expectedSalaryHelp") }]}
+              label={t("label.expectedSalary")}
+              rules={[{ required: true, message: t("help.expectedSalary") }]}
             >
-              <Input type="number" className={style["input-number"]} />
+              <Input
+                type="number"
+                className={style["input-number"]}
+                placeholder={t("placeholder.expectedSalary")}
+                max={10000000}
+              />
             </Form.Item>
 
             <Form.Item label={null}>
-              <Button onClick={() => handleResetForm()}>{t("resetBtn")}</Button>
+              <Button onClick={() => handleResetForm()}>{t("actionButton.reset")}</Button>
             </Form.Item>
             <Form.Item label={null}>
-              <Button htmlType="submit">{t("submitBtn")}</Button>
+              <Button htmlType="submit">{t("actionButton.submit")}</Button>
             </Form.Item>
           </div>
         </Form>

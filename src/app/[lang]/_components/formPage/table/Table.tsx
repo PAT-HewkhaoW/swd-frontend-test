@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useTranslation } from "@/app/i18n/client";
 import "./table.scss";
 
-import { deleteMany, deleteOne, getAll } from "@/app/stores/slice/formSlice";
+import { deleteMany, getAll } from "@/app/stores/slice/formSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Table, TableProps, Button, Checkbox, CheckboxProps } from "antd";
@@ -28,12 +28,11 @@ interface DataType extends FieldType {
   key: string;
 }
 
-interface TableProps {
-  data: DataType;
+interface TableDataProps {
   onAction: (action: string, data: DataType) => void;
 }
 
-export default function CTable({ value, onAction }: TableProps) {
+export default function CTable({ onAction }: TableDataProps) {
   const dispatch = useDispatch();
   const formDataList = useSelector(getAll);
 
@@ -42,7 +41,7 @@ export default function CTable({ value, onAction }: TableProps) {
   }));
 
   const [selectedRowKeys, setSelectedRowKeys] = useState<string[]>([]);
-  const { t, i18n } = useTranslation(undefined, "form");
+  const { t } = useTranslation(undefined, "form");
 
   const columns = [
     {
@@ -63,7 +62,8 @@ export default function CTable({ value, onAction }: TableProps) {
       dataIndex: "mobilePhone",
       key: "mobilePhone",
       render: (_: string, record: DataType) =>
-        formatPhoneNumber(record.mobileCode as string, record.mobilePhone as string) || "",
+        formatPhoneNumber(record.mobileCode?.toString() as string, record.mobilePhone as string) ||
+        "",
     },
     {
       titleKey: "table.nationality",
@@ -78,7 +78,6 @@ export default function CTable({ value, onAction }: TableProps) {
       render: (_: string, record: DataType) => (
         <>
           <span className="table--manage-ctn">
-            {record.key}
             <Button onClick={() => onEditItem(record)} variant="text">
               {t("actionButton.edit")}
             </Button>
@@ -124,8 +123,6 @@ export default function CTable({ value, onAction }: TableProps) {
     onChange: onSelectChange,
   };
 
-  const hasSelected = selectedRowKeys.length > 0;
-
   return (
     <>
       <div className="container">
@@ -137,11 +134,15 @@ export default function CTable({ value, onAction }: TableProps) {
           dataSource={data}
           columns={columns.map((col) => ({ ...col, title: t(col.titleKey) }))}
           rowSelection={rowSelection}
-          pagination={{ position: ["topRight"] }}
+          pagination={{
+            position: ["topRight"],
+            locale: {
+              prev_page: t("table.prev"),
+              next_page: t("table.next"),
+            },
+          }}
           rowKey="key"
         ></Table>
-        {/* {hasSelected ? `Selected ${selectedRowKeys.length} items` : null}
-      selected : {selectedRowKeys} */}
       </div>
     </>
   );

@@ -1,5 +1,6 @@
 import React from "react";
 import { Input } from "antd";
+import { useTranslation } from "@/app/i18n/client";
 
 interface PhoneInputProps {
   value: string;
@@ -7,12 +8,14 @@ interface PhoneInputProps {
   country: "us" | "fr" | "th" | "";
 }
 
-const commonRegex: string = `^d{10}$`;
-const usRegex: string = `^d{10}$`;
-const frRegex: string = `^0[1-5|6-7]d{8}$`;
-const thRegex: string = `^(0[2-9]d{8}|09d{8})$`;
+// const commonRegex: string = `^d{10}$`;
+// const usRegex: string = `^d{10}$`;
+// const frRegex: string = `^0[1-5|6-7]d{8}$`;
+// const thRegex: string = `^(0[2-9]d{8}|09d{8})$`;
 
 export default function PhoneInput({ value, onchange, country }: PhoneInputProps) {
+  const { t } = useTranslation(undefined, "form");
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const input = e.target.value.replace("/D/g", "");
     let formatted = "";
@@ -45,7 +48,12 @@ export default function PhoneInput({ value, onchange, country }: PhoneInputProps
 
   return (
     <>
-      <Input value={value} maxLength={10} onChange={handleInputChange} />
+      <Input
+        value={value}
+        maxLength={10}
+        onChange={handleInputChange}
+        placeholder={t("placeholder.mobilePhone")}
+      />
     </>
   );
 }

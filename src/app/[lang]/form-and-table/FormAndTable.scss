@@ -1,0 +1,22 @@
+@import "../../styles/breakpoints";
+
+.page-wrapper {
+  width: 100%;
+  display: grid;
+  justify-items: center;
+
+  .page-title {
+    width: 100%;
+    max-width: 1920px;
+    font-size: 24px;
+    font-weight: bold;
+    padding-bottom: 24px;
+  }
+  .form-and-table-container {
+    width: 100%;
+    min-width: $screen-max-desktop;
+    max-width: $screen-max-desktop;
+    display: grid;
+    row-gap: 24px;
+  }
+}

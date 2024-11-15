@@ -3,7 +3,7 @@ import "@/app/styles/_base.scss";
 
 export async function generateMetadata() {
   return {
-    title: "Layout & Style",
+    title: "Form & Table",
     description: "",
   };
 }
