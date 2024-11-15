@@ -1,8 +1,6 @@
 {
   "pageTitle": "การจัดการหน้าฟอร์ม",
 
-  "title": "คำนำหน้า",
-
   "label": {
     "title": "คำนำหน้า",
     "firstName": "ชื่อจริง",
@@ -45,18 +43,6 @@
     "passportNo": "กรุณากรอกหนังสือเดินทาง",
     "expectedSalary": "กรุณากรอกเงินเดือนที่คาดหวัง"
   },
-
-  "firstName": "ชื่อจริง",
-  "firstNamePlaceholder": "ชื่อจริง",
-  "firstNameHelp": "กรุณากรอกชื่อจริง",
-
-  "lastName": "นามสกุล",
-  "lastNamePlaceholder": "นามสกุล",
-  "lastNameHelp": "กรุณากรอกนามสกุล",
-
-  "birthDate": "วันเกิด",
-  "birthDatePlaceholder": "BirthDay",
-  "birthDateHelp": "Please Input Your BirthDay",
 
   "options": {
     "title": {
