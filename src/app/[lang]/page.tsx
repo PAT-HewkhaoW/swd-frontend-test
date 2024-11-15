@@ -1,10 +1,18 @@
+"use client";
+
 import style from "./page.module.scss";
-
-import initI18nextTranslation from "../i18n/index";
 import Link from "next/link";
+import { useTranslation } from "../i18n/client";
+import { useEffect, useState } from "react";
 
-export default async function Home({ params: { lang } }: Readonly<{ params: { lang: string } }>) {
-  const { t: t } = await initI18nextTranslation(lang as string, ["common", "form"]);
+export function Home() {
+  const { t, i18n } = useTranslation(undefined, ["common", "form"]);
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   const items = [
     {
       number: 1,
@@ -16,6 +24,10 @@ export default async function Home({ params: { lang } }: Readonly<{ params: { la
     },
   ];
 
+  if (!isClient) {
+    return null;
+  }
+
   return (
     <div className={style.page}>
       <div className={style.main}>
@@ -23,7 +35,7 @@ export default async function Home({ params: { lang } }: Readonly<{ params: { la
           {items.map((item, index) => {
             return (
               <div key={index} className={style["test-item"]}>
-                <Link href={`/${lang}/${item.href}`}>
+                <Link href={`/${item.href}`}>
                   <div className={style.title}>{t("test-title", { num: index + 1 })}</div>
                   <div className={style.description}>{t(`test${index + 1}desc`)}</div>
                 </Link>
@@ -36,10 +48,6 @@ export default async function Home({ params: { lang } }: Readonly<{ params: { la
   );
 }
 
-// export async function getServerSideProps({ locale }: { locale: string }) {
-//   return {
-//     props: {
-//       ...(await serverSideTranslations(locale, ["common"])),
-//     },
-//   };
-// }
+export default function Page() {
+  return <Home />;
+}

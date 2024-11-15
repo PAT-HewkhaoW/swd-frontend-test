@@ -31,19 +31,15 @@ export async function generateStaticParams() {
 
 export default function RootLayout({
   children,
-  params: { lang },
 }: Readonly<{
   children: React.ReactNode;
-  params: {
-    lang: string;
-  };
 }>) {
   return (
-    <html lang={lang}>
+    <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <ReduxProvider>
           <div className={style["language-switcher"]}>
-            <I18nSelect currentLang={lang} />
+            <I18nSelect />
           </div>
           {children}
         </ReduxProvider>
