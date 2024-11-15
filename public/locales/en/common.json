@@ -1,6 +1,7 @@
 {
   "th": "TH",
   "en": "EN",
+  "backToHone": "Home",
   "form": "form",
   "test": "Test {{num}}",
   "test-title": "Test {{num}}",
