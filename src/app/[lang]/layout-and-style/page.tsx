@@ -1,9 +1,10 @@
 "use client";
 
 import { useTranslation } from "@/app/i18n/client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./LayoutAndStyle.scss";
-import { Col, Divider, Row } from "antd";
+import { LoadingOutlined } from "@ant-design/icons";
+import { Col, Divider, Row, Spin } from "antd";
 
 interface Item {
   shape: string;
@@ -35,6 +36,11 @@ const items: Item[] = [
 
 export default function LayoutPage() {
   const { t } = useTranslation(undefined, ["layout"]);
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   // state
   const [shapeList, setShapeList] = useState<Item[]>(items);
@@ -105,12 +111,20 @@ export default function LayoutPage() {
 
   // func#end
 
+  if (!isClient) {
+    return (
+      <Spin
+        indicator={<LoadingOutlined spin style={{ fontSize: 48 }} />}
+        style={{ position: "absolute", top: "50%", left: "50%" }}
+      />
+    );
+  }
+
   return (
     <>
       <div className="page-wrapper">
+        <div className="page-title">{t("pageTitle")}</div>
         <div className="layout-and-style-container">
-          <div className="page-title">{t("pageTitle")}</div>
-
           <div className="page-content">
             <div className="button-container">
               {/* use antd grid layout */}

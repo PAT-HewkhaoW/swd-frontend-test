@@ -15,18 +15,23 @@ $shadow-color: rgba(68, 68, 70, 0.15);
   display: grid;
   justify-items: center;
 
+  .page-title {
+    width: 100%;
+    max-width: 1920px;
+    font-size: 24px;
+    font-weight: bold;
+    padding-bottom: 24px;
+  }
+
   .layout-and-style-container {
     width: 100%;
     min-width: $screen-max-desktop;
     max-width: $screen-max-desktop;
 
-    .page-title {
-      font-size: 24px;
-    }
-
     .page-content {
       display: flex;
       flex-direction: column;
+      gap: 16px;
 
       .button-group {
         padding: 16px;
